@@ -1,5 +1,5 @@
-# Moonlight Bay · Lot 127 (across the street)
+# Moonlight Bay — Lot 127 (across the street from the canal)
 
-Customer presentation for the street lot. Factory PT200009 two-story gable, 2BR/1BA. Deck faces the canal across the dirt road.
+Customer presentation for PT200009, two-story gable, 2 bed / 1 bath, 400 sf screened teak deck facing the canal.
 
-Not the community catalog.
+Live: https://moonlightbay-lot-127.vercel.app
