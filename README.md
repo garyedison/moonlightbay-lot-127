@@ -1,5 +1,5 @@
-# Moonlight Bay — Lot 127 (across the street from the canal)
+# Moonlight Bay — Lot 127 (inland of the dirt road)
 
-Customer presentation for PT200009, two-story gable, 2 bed / 1 bath, 400 sf screened teak deck facing the canal.
+Customer presentation for PT200009. Looks at Lot 115 across the road. Porch does not overlook the water. Seven factory SKUs on this lot.
 
-Live: https://moonlightbay-lot-127.vercel.app
+Live: https://moonlightbay-lot127.vercel.app
