@@ -2,7 +2,7 @@ const usd = (n) =>
   n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
 
 const NOW_GROUPS = [
-  { id: "landed", title: "Landed to the slab", blurb: "$25k per 40HQ × 1.5, from a 3-house order." },
+  { id: "landed", title: "Landed to the slab", blurb: "$25k per 40HQ × 1.5, from a two-house order (three full 40HQ)." },
   { id: "pad", title: "Pad, patio, ties, crane, paint, fee", blurb: "Civil on Lot 127. Paint and the management fee stay on for shell and unfurnished." },
   { id: "labor", title: "Assembly", blurb: "90 hours, China crew + Belize crew." },
   { id: "mep", title: "Site MEP", blurb: "Needed to live in it empty. Off for shell on the pad." },
@@ -28,7 +28,7 @@ const NOW_LINES = [
     g: "landed",
     label: "1.5 × 40HQ landed to the slab",
     amount: 37500,
-    hint: "$25,000 per 40HQ × 1.5. Bulk of 3 houses (4.5 HQ).",
+    hint: "$25,000 per 40HQ × 1.5. Two houses fill three full 40HQ — no half-empty box.",
   },
   { id: "pad", g: "pad", label: "Concrete pad", amount: 12000 },
   { id: "patio", g: "pad", label: "Rock patio and landscape to the front door", amount: 6500 },
