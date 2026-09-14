@@ -3,7 +3,7 @@ const usd = (n) =>
 
 const NOW_GROUPS = [
   { id: "landed", title: "Landed to the slab", blurb: "$25k per 40HQ × 1.5, from a 3-house order." },
-  { id: "pad", title: "Pad, patio, ties, crane, net", blurb: "Civil on Lot 127. Patio and net come off for shell-only." },
+  { id: "pad", title: "Pad, patio, ties, crane, paint, fee", blurb: "Civil on Lot 127. Paint and the management fee stay on for shell and unfurnished." },
   { id: "labor", title: "Assembly", blurb: "90 hours, China crew + Belize crew." },
   { id: "mep", title: "Site MEP", blurb: "Needed to live in it empty. Off for shell on the pad." },
   { id: "add", title: "Add or take away", blurb: "Solar and a ground deck — both off until you turn them on." },
@@ -18,7 +18,7 @@ const PREV_GROUPS = [
   { id: "ffe", title: "FF&E", blurb: "Caribbean Salt kit fitted before ship. That previous sheet had no separate 20 ft furniture container." },
 ];
 
-const NOW_SHELL = ["landed", "pad", "tie", "crane", "labor"];
+const NOW_SHELL = ["landed", "pad", "tie", "crane", "labor", "paint", "pm"];
 const NOW_LIVEABLE = [...NOW_SHELL, "patio", "mosquito", "mep"];
 const NOW_FFE = ["living", "kitchen", "bed1", "bed2", "bath", "install", "ffefreight"];
 
@@ -34,6 +34,19 @@ const NOW_LINES = [
   { id: "patio", g: "pad", label: "Rock patio and landscape to the front door", amount: 6500 },
   { id: "tie", g: "pad", label: "Hurricane tie-downs", amount: 2500 },
   { id: "crane", g: "pad", label: "Crane to set the modules", amount: 3500 },
+  {
+    id: "paint",
+    g: "pad",
+    label: "Marine-grade cream paint on steel · 5-year coat",
+    amount: 4800,
+    hint: "Creme white marine enamel on exposed steel beams. Recoat at year five.",
+  },
+  {
+    id: "pm",
+    g: "pad",
+    label: "Project management and contingency fee",
+    amount: 12000,
+  },
   {
     id: "mosquito",
     g: "pad",
@@ -118,8 +131,8 @@ const STYLES = {
     lines: NOW_LINES,
     defaultPreset: "unfurnished",
     presets: [
-      { id: "shell", label: "Shell on the pad", hint: "Landed modules, concrete pad, crane, ties, 90 hours to assemble.", ids: NOW_SHELL },
-      { id: "unfurnished", label: "Unfurnished, liveable", hint: "Under $100k — pad, rock patio, mosquito net, MEP. No furniture, no solar, no ground deck.", ids: NOW_LIVEABLE },
+      { id: "shell", label: "Shell on the pad", hint: "Landed modules, concrete pad, crane, ties, 90 hours, cream marine paint, project management fee.", ids: NOW_SHELL },
+      { id: "unfurnished", label: "Unfurnished, liveable", hint: "Under $100k — pad, rock patio, mosquito net, MEP, cream marine paint, project management fee. No furniture, no solar, no ground deck.", ids: NOW_LIVEABLE },
       { id: "solar", label: "Unfurnished + solar", hint: "Liveable shell plus 5 kW solar and battery. Crosses $100k on this add.", ids: [...NOW_LIVEABLE, "solar"] },
       { id: "furnished", label: "Fully furnished", hint: "Liveable plus Caribbean Salt kit, install, and a 20 ft furniture container DDP to the gate.", ids: [...NOW_LIVEABLE, ...NOW_FFE] },
     ],
