@@ -1,7 +1,7 @@
 const usd = (n) =>
   n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
 
-const GROUPS = [
+const NOW_GROUPS = [
   { id: "landed", title: "Landed to the slab", blurb: "$25k per 40HQ × 1.5, from a 3-house order." },
   { id: "pad", title: "Pad, patio, ties, crane, net", blurb: "Civil on Lot 127. Patio and net come off for shell-only." },
   { id: "labor", title: "Assembly", blurb: "90 hours, China crew + Belize crew." },
@@ -10,7 +10,19 @@ const GROUPS = [
   { id: "ffe", title: "FF&E", blurb: "Furniture plus a 20 ft container DDP to the gate. Off when unfurnished." },
 ];
 
-const LINES = [
+const PREV_GROUPS = [
+  { id: "landed", title: "Landed shell", blurb: "Factory house, ocean freight, Belize inland — as previously quoted." },
+  { id: "civil", title: "Civil and MEP", blurb: "Slab, excavation, electrical, plumbing, ties, crane, contingency." },
+  { id: "site", title: "On the lot", blurb: "400 sf screened teak deck, rail, fence." },
+  { id: "labor", title: "Assembly", blurb: "12 days Belize crew." },
+  { id: "ffe", title: "FF&E", blurb: "Caribbean Salt kit fitted before ship. That previous sheet had no separate 20 ft furniture container." },
+];
+
+const NOW_SHELL = ["landed", "pad", "tie", "crane", "labor"];
+const NOW_LIVEABLE = [...NOW_SHELL, "patio", "mosquito", "mep"];
+const NOW_FFE = ["living", "kitchen", "bed1", "bed2", "bath", "install", "ffefreight"];
+
+const NOW_LINES = [
   {
     id: "landed",
     g: "landed",
@@ -72,45 +84,89 @@ const LINES = [
   },
 ];
 
-const SHELL = ["landed", "pad", "tie", "crane", "labor"];
-const LIVEABLE = [...SHELL, "patio", "mosquito", "mep"];
-const FFE = ["living", "kitchen", "bed1", "bed2", "bath", "install", "ffefreight"];
-
-const PRESETS = [
-  {
-    id: "shell",
-    label: "Shell on the pad",
-    hint: "Landed modules, concrete pad, crane, ties, 90 hours to assemble. Empty shell.",
-    ids: SHELL,
-  },
-  {
-    id: "unfurnished",
-    label: "Unfurnished, liveable",
-    hint: "Under $100k — pad, rock patio, mosquito net, MEP. No furniture, no solar, no ground deck.",
-    ids: LIVEABLE,
-  },
-  {
-    id: "solar",
-    label: "Unfurnished + solar",
-    hint: "Liveable shell plus 5 kW solar and battery. Crosses $100k on this add.",
-    ids: [...LIVEABLE, "solar"],
-  },
-  {
-    id: "furnished",
-    label: "Fully furnished",
-    hint: "Liveable plus Caribbean Salt kit, install, and a 20 ft furniture container DDP to the gate.",
-    ids: [...LIVEABLE, ...FFE],
-  },
+const PREV_LINES = [
+  { id: "shell", g: "landed", label: "Unfurnished shell", amount: 26250, hint: "Factory module, on site" },
+  { id: "freight", g: "landed", label: "Ocean freight", amount: 19000 },
+  { id: "inland", g: "landed", label: "Inland haul and duties", amount: 5000 },
+  { id: "civil", g: "civil", label: "Civil — slab, excavation, site prep", amount: 22000 },
+  { id: "mep", g: "civil", label: "MEP — electrical, plumbing, septic tie", amount: 13000 },
+  { id: "tie", g: "civil", label: "Hurricane tie-downs", amount: 2500 },
+  { id: "crane", g: "civil", label: "Crane", amount: 3500 },
+  { id: "contingency", g: "civil", label: "Contingency", amount: 20000 },
+  { id: "deck", g: "site", label: "400 sf teak deck", amount: 14000 },
+  { id: "screen", g: "site", label: "Mosquito screen walls and roof", amount: 9500 },
+  { id: "rail", g: "site", label: "Deck rail", amount: 3200 },
+  { id: "fence", g: "site", label: "Wood fence", amount: 7200 },
+  { id: "labor", g: "labor", label: "Assembly labor · 12 days", amount: 5040 },
+  { id: "living", g: "ffe", label: "Living furniture", amount: 3315 },
+  { id: "kitchen", g: "ffe", label: "Kitchen loose", amount: 840 },
+  { id: "bed1", g: "ffe", label: "Primary bedroom", amount: 3030 },
+  { id: "bed2", g: "ffe", label: "Bedroom 2", amount: 2345 },
+  { id: "bath1", g: "ffe", label: "Bath 1", amount: 320 },
+  { id: "bath2", g: "ffe", label: "Bath 2", amount: 320 },
+  { id: "deckffe", g: "ffe", label: "Screened 400 sf deck furniture", amount: 3215 },
+  { id: "install", g: "ffe", label: "Factory fit and island install", amount: 30000 },
 ];
 
+const PREV_UNFURNISHED = ["shell", "freight", "inland", "civil", "mep", "tie", "crane", "contingency", "deck", "screen", "rail", "fence", "labor"];
+const PREV_FURNISHED = PREV_UNFURNISHED.concat(["living", "kitchen", "bed1", "bed2", "bath1", "bath2", "deckffe", "install"]);
+
+const STYLES = {
+  now: {
+    name: "This quote · PT190249",
+    groups: NOW_GROUPS,
+    lines: NOW_LINES,
+    defaultPreset: "unfurnished",
+    presets: [
+      { id: "shell", label: "Shell on the pad", hint: "Landed modules, concrete pad, crane, ties, 90 hours to assemble.", ids: NOW_SHELL },
+      { id: "unfurnished", label: "Unfurnished, liveable", hint: "Under $100k — pad, rock patio, mosquito net, MEP. No furniture, no solar, no ground deck.", ids: NOW_LIVEABLE },
+      { id: "solar", label: "Unfurnished + solar", hint: "Liveable shell plus 5 kW solar and battery. Crosses $100k on this add.", ids: [...NOW_LIVEABLE, "solar"] },
+      { id: "furnished", label: "Fully furnished", hint: "Liveable plus Caribbean Salt kit, install, and a 20 ft furniture container DDP to the gate.", ids: [...NOW_LIVEABLE, ...NOW_FFE] },
+    ],
+  },
+  previous: {
+    name: "Previous · two-story gable",
+    groups: PREV_GROUPS,
+    lines: PREV_LINES,
+    defaultPreset: "furnished",
+    presets: [
+      { id: "landed", label: "Shell, landed", hint: "Factory + freight + inland — as on the previous sheet.", ids: ["shell", "freight", "inland"] },
+      { id: "civil", label: "Shell + civil / MEP", hint: "Landed, plus slab, MEP, ties, crane, contingency.", ids: ["shell", "freight", "inland", "civil", "mep", "tie", "crane", "contingency"] },
+      { id: "unfurnished", label: "Unfurnished on the lot", hint: "Previous gable ready to live in empty — 400 sf screened deck, no furniture.", ids: PREV_UNFURNISHED },
+      { id: "furnished", label: "Fully furnished", hint: "The $193,575 all-in we quoted on Lot 127 before.", ids: PREV_FURNISHED },
+    ],
+  },
+};
+
+const ORDER = ["now", "previous"];
+
+let styleId = "now";
 let preset = "unfurnished";
 let on = new Set();
 
+function style() {
+  return STYLES[styleId];
+}
+function lines() {
+  return style().lines;
+}
+function groups() {
+  return style().groups;
+}
+function presets() {
+  return style().presets;
+}
+
 function applyPreset(id) {
   preset = id;
-  const p = PRESETS.find((x) => x.id === id);
+  const p = presets().find((x) => x.id === id);
   on = new Set(p.ids);
   render();
+}
+
+function applyStyle(id) {
+  styleId = id;
+  applyPreset(style().defaultPreset);
 }
 
 function toggle(id) {
@@ -122,7 +178,7 @@ function toggle(id) {
 
 function toggleGroup(g) {
   preset = "custom";
-  const rows = LINES.filter((l) => l.g === g);
+  const rows = lines().filter((l) => l.g === g);
   const allOn = rows.every((l) => on.has(l.id));
   for (const l of rows) {
     if (allOn) on.delete(l.id);
@@ -132,32 +188,40 @@ function toggleGroup(g) {
 }
 
 function sum(section) {
-  return LINES.filter((l) => (!section || l.g === section) && on.has(l.id)).reduce(
-    (s, l) => s + l.amount,
-    0,
-  );
+  return lines()
+    .filter((l) => (!section || l.g === section) && on.has(l.id))
+    .reduce((s, l) => s + l.amount, 0);
 }
 
 function presetTotal(id) {
-  const ids = new Set(PRESETS.find((x) => x.id === id).ids);
-  return LINES.filter((l) => ids.has(l.id)).reduce((s, l) => s + l.amount, 0);
+  const ids = new Set(presets().find((x) => x.id === id).ids);
+  return lines()
+    .filter((l) => ids.has(l.id))
+    .reduce((s, l) => s + l.amount, 0);
 }
 
 function render() {
-  document.getElementById("preset-chips").innerHTML = PRESETS.map(
-    (p) =>
-      `<button type="button" class="${preset === p.id ? "on" : ""}" data-preset="${p.id}"><span>${p.label}</span><strong>${usd(presetTotal(p.id))}</strong></button>`,
+  document.getElementById("style-chips").innerHTML = ORDER.map(
+    (id) =>
+      `<button type="button" class="${id === styleId ? "on" : ""}" data-style="${id}">${STYLES[id].name}</button>`,
   ).join("");
 
-  document.getElementById("preset-hint").textContent =
-    preset === "custom"
-      ? "Custom mix — numbers update as you check lines."
-      : PRESETS.find((p) => p.id === preset).hint;
+  document.getElementById("preset-chips").innerHTML = presets()
+    .map(
+      (p) =>
+        `<button type="button" class="${preset === p.id ? "on" : ""}" data-preset="${p.id}"><span>${p.label}</span><strong>${usd(presetTotal(p.id))}</strong></button>`,
+    )
+    .join("");
 
-  document.getElementById("boq-groups").innerHTML = GROUPS.map((g) => {
-    const rows = LINES.filter((l) => l.g === g.id);
-    const sub = sum(g.id);
-    return `<article class="group">
+  const active = presets().find((p) => p.id === preset);
+  document.getElementById("preset-hint").textContent =
+    preset === "custom" ? "Custom mix — numbers update as you check lines." : active.hint;
+
+  document.getElementById("boq-groups").innerHTML = groups()
+    .map((g) => {
+      const rows = lines().filter((l) => l.g === g.id);
+      const sub = sum(g.id);
+      return `<article class="group">
       <div class="group-head">
         <div>
           <h3>${g.title}</h3>
@@ -183,27 +247,45 @@ function render() {
         )
         .join("")}</ul>
     </article>`;
-  }).join("");
+    })
+    .join("");
 
   const total = sum();
   const names = {
     shell: "Shell on the pad",
-    unfurnished: "Unfurnished, liveable",
+    landed: "Shell, landed",
+    civil: "Shell + civil / MEP",
+    unfurnished: styleId === "now" ? "Unfurnished, liveable" : "Unfurnished on the lot",
     solar: "Unfurnished + solar",
     furnished: "Fully furnished",
     custom: "Custom mix",
   };
-  document.getElementById("total-kicker").textContent = names[preset] || "Custom mix";
+  document.getElementById("total-kicker").textContent = `${style().name} · ${names[preset] || "Custom mix"}`;
   document.getElementById("total-num").textContent = usd(total);
-  document.getElementById("total-badge").textContent =
-    total <= 100000
-      ? "Under the $100k unfurnished target"
-      : "Over $100k — turn solar, deck, or furniture off to come back under.";
-  document.getElementById("total-dl").innerHTML = GROUPS.map(
-    (g) => `<div><dt>${g.title}</dt><dd>${usd(sum(g.id))}</dd></div>`,
-  ).join("");
+
+  const prevFurnished = 193575;
+  if (styleId === "previous") {
+    document.getElementById("total-badge").textContent =
+      preset === "furnished"
+        ? "The previous Lot 127 quote, all-in furnished"
+        : "Previous two-story gable — switch lines to match that sheet";
+  } else if (total <= 100000) {
+    document.getElementById("total-badge").textContent =
+      "Under $100k · saves " + usd(prevFurnished - total) + " vs previous furnished gable";
+  } else {
+    document.getElementById("total-badge").textContent =
+      "Saves " + usd(prevFurnished - total) + " vs previous furnished gable · turn solar, deck, or furniture off to come back under $100k.";
+  }
+
+  document.getElementById("total-dl").innerHTML = groups()
+    .map((g) => `<div><dt>${g.title}</dt><dd>${usd(sum(g.id))}</dd></div>`)
+    .join("");
 }
 
+document.getElementById("style-chips").addEventListener("click", (e) => {
+  const b = e.target.closest("[data-style]");
+  if (b) applyStyle(b.dataset.style);
+});
 document.getElementById("preset-chips").addEventListener("click", (e) => {
   const b = e.target.closest("[data-preset]");
   if (b) applyPreset(b.dataset.preset);
