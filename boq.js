@@ -4,7 +4,7 @@ const usd = (n) =>
 const NOW_GROUPS = [
   { id: "landed", title: "Landed to the slab", blurb: "$25k per 40HQ × 1.5, from a two-house order (three full 40HQ)." },
   { id: "pad", title: "Pad, patio, ties, crane, paint, fee", blurb: "Civil on Lot 127. Paint and the management fee stay on for shell and unfurnished." },
-  { id: "labor", title: "Assembly", blurb: "90 hours, China crew + Belize crew." },
+  { id: "labor", title: "Assembly", blurb: "First four homes: 2 Chinese fly-in plus 2 Belize helpers. After training, Belize-only is cheaper." },
   { id: "mep", title: "Site MEP", blurb: "Needed to live in it empty. Off for shell on the pad." },
   { id: "add", title: "Add or take away", blurb: "Solar and a ground deck — both off until you turn them on." },
   { id: "ffe", title: "FF&E", blurb: "Furniture plus a 20 ft container DDP to the gate. Off when unfurnished." },
@@ -18,7 +18,7 @@ const PREV_GROUPS = [
   { id: "ffe", title: "FF&E", blurb: "Caribbean Salt kit fitted before ship. That previous sheet had no separate 20 ft furniture container." },
 ];
 
-const NOW_SHELL = ["landed", "pad", "tie", "crane", "labor", "paint", "pm"];
+const NOW_SHELL = ["landed", "pad", "tie", "crane", "crew-cn", "crew-bz", "paint", "pm"];
 const NOW_LIVEABLE = [...NOW_SHELL, "patio", "mosquito", "mep"];
 const NOW_FFE = ["living", "kitchen", "bed1", "bed2", "bath", "install", "ffefreight"];
 
@@ -55,11 +55,25 @@ const NOW_LINES = [
     hint: "The balcony is the evening room. No ground deck.",
   },
   {
-    id: "labor",
+    id: "crew-cn",
     g: "labor",
-    label: "Assembly · 90 hours China + Belize",
+    label: "Chinese skilled crew · 2 workers, fly-in",
+    amount: 7200,
+    hint: "Tickets, hotel, food, salary. Factory net. Share of a four-home run: 115, 127, two gate spec houses.",
+  },
+  {
+    id: "crew-bz",
+    g: "labor",
+    label: "Belize helpers · 2 workers",
+    amount: 2240,
+    hint: "7–10 days per two homes at $280/day.",
+  },
+  {
+    id: "labor-later",
+    g: "labor",
+    label: "Later Belize-only assembly (after training)",
     amount: 3780,
-    hint: "9 × 10-hour days at $42 / hour billed.",
+    hint: "Off on the first four homes.",
   },
   { id: "mep", g: "mep", label: "MEP — electrical, plumbing, septic, cistern", amount: 13000 },
   {
@@ -131,8 +145,8 @@ const STYLES = {
     lines: NOW_LINES,
     defaultPreset: "unfurnished",
     presets: [
-      { id: "shell", label: "Shell on the pad", hint: "Landed modules, concrete pad, crane, ties, 90 hours, cream marine paint, project management fee.", ids: NOW_SHELL },
-      { id: "unfurnished", label: "Unfurnished, liveable", hint: "Under $100k — pad, rock patio, mosquito net, MEP, cream marine paint, project management fee. No furniture, no solar, no ground deck.", ids: NOW_LIVEABLE },
+      { id: "shell", label: "Shell on the pad", hint: "Landed modules, pad, crane, ties, cream marine paint, project management, 2 Chinese + 2 Belizean crew.", ids: NOW_SHELL },
+      { id: "unfurnished", label: "Unfurnished, liveable", hint: "Pad, rock patio, mosquito net, MEP, first-run Chinese fly-in. No furniture, no solar, no ground deck.", ids: NOW_LIVEABLE },
       { id: "solar", label: "Unfurnished + solar", hint: "Liveable shell plus 5 kW solar and battery. Crosses $100k on this add.", ids: [...NOW_LIVEABLE, "solar"] },
       { id: "furnished", label: "Fully furnished", hint: "Liveable plus Caribbean Salt kit, install, and a 20 ft furniture container DDP to the gate.", ids: [...NOW_LIVEABLE, ...NOW_FFE] },
     ],
