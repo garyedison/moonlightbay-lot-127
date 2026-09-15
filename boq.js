@@ -4,7 +4,7 @@ const usd = (n) =>
 const NOW_GROUPS = [
   { id: "landed", title: "Landed to the slab", blurb: "$25k per 40HQ × 1.5, from a two-house order (three full 40HQ)." },
   { id: "pad", title: "Pad, patio, ties, crane, paint, fee", blurb: "Civil on Lot 127. Paint and the management fee stay on for shell and unfurnished." },
-  { id: "labor", title: "Assembly", blurb: "First four homes: 2 Chinese fly-in plus 2 Belize helpers. After training, Belize-only is cheaper." },
+  { id: "labor", title: "Assembly", blurb: "4 workers · $9,440 all-in for this house." },
   { id: "mep", title: "Site MEP", blurb: "Needed to live in it empty. Off for shell on the pad." },
   { id: "add", title: "Add or take away", blurb: "Solar and a ground deck — both off until you turn them on." },
   { id: "ffe", title: "FF&E", blurb: "Furniture plus a 20 ft container DDP to the gate. Off when unfurnished." },
@@ -145,8 +145,8 @@ const STYLES = {
     lines: NOW_LINES,
     defaultPreset: "unfurnished",
     presets: [
-      { id: "shell", label: "Shell on the pad", hint: "Landed modules, pad, crane, ties, cream marine paint, project management, 2 Chinese + 2 Belizean crew.", ids: NOW_SHELL },
-      { id: "unfurnished", label: "Unfurnished, liveable", hint: "Pad, rock patio, mosquito net, MEP, first-run Chinese fly-in. No furniture, no solar, no ground deck.", ids: NOW_LIVEABLE },
+      { id: "shell", label: "Shell on the pad", hint: "Landed modules, pad, crane, ties, cream marine paint, project management, 4-worker assembly.", ids: NOW_SHELL },
+      { id: "unfurnished", label: "Unfurnished, liveable", hint: "Pad, rock patio, mosquito net, MEP, 4-worker assembly. No furniture, no solar, no ground deck.", ids: NOW_LIVEABLE },
       { id: "solar", label: "Unfurnished + solar", hint: "Liveable shell plus 5 kW solar and battery. Crosses $100k on this add.", ids: [...NOW_LIVEABLE, "solar"] },
       { id: "furnished", label: "Fully furnished", hint: "Liveable plus Caribbean Salt kit, install, and a 20 ft furniture container DDP to the gate.", ids: [...NOW_LIVEABLE, ...NOW_FFE] },
     ],
